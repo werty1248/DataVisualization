@@ -10,7 +10,7 @@ let heatmap_height = heatmap_size * 7;
 let heatmap_width = heatmap_size * 25;
 let margin = { top: 10, right: 10, bottom: 40, left: 40 };
 let pollutant_info = {"1":"SO2","3":"NO2","5":"CO","6":"O3","8":"PM10","9":"PM2.5"};
-let full_data; // loaded data
+let full_data = []; // loaded data
 let xScale, yScale;
 let periodSlider, empPeriodSlider;
 
@@ -27,26 +27,18 @@ function str2date(str) {
 }
 
 d3.csv("https://raw.githubusercontent.com/werty1248/DataVisualization/main/AIR_HOUR_202001.csv", function(csvData) {
-    csvData.forEach((d, index) => {
-		d["측정항목"] = pollutant_info[d["측정항목 코드"]];
-		d["평균값"] = +d["평균값"];
-		d["지자체 기준초과 구분"] = +d["지자체 기준초과 구분"];
-		d["국가 기준초과 구분"] = +d["국가 기준초과 구분"];
-		d["저장일시"] = str2date(d["저장일시"]);
-		d["측정일시"] = str2date(d["측정일시"]);
-	});
-}, function(error, rows){
-	console.log(error);
-});
-
-    full_data = csvData.filter(function(d) {
-		return d["측정기 상태"] === "0";
-		})
-	console.log("Sample Data : " + JSON.stringify(full_data[0]));
-    initialize();
-    update();
-});
-
+    csvData["측정항목"] = pollutant_info[csvData["측정항목 코드"]];
+	csvData["평균값"] = +csvData["평균값"];
+	csvData["지자체 기준초과 구분"] = +csvData["지자체 기준초과 구분"];
+	csvData["국가 기준초과 구분"] = +csvData["국가 기준초과 구분"];
+	csvData["저장일시"] = str2date(csvData["저장일시"]);
+	csvData["측정일시"] = str2date(csvData["측정일시"]);
+	
+	if(csvData["측정기 상태"] === "0")
+		full_data.push(csvData)
+	}).then(d => {console.log("Data Load Finished");
+	initialize();});
+	
 //임시로 빼놓기(라인차트)
 function line_initialize() {
     svg = d3.select("#svg");
