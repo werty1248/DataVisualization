@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>D3.js Playground</title>
+	<link rel="stylesheet" href="css/rSlider.min.css">
+	
+	<script src="https://d3js.org/d3.v6.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+	<script src="js/rSlider.min.js"></script>
+	<script src="js/d3controll.js"></script>
+	<script src="js/heatmap.js"></script>
+	<script src="js/linearea.js"></script>
+	<script src="js/lineoverlap.js"></script>
+
+    <style>
+        div.slider{
+			width: 70%;
+			max-width: 500px;
+			margin-top: 40px;
+			padding-left: 50px;
+        }
+        div.interface{
+			padding-top: 10px;
+			padding-bottom: 10px;
+        }
+    </style>
+	
+</head>
+
+<body>
+  <div class="interface">
+    Views:
+    <input type="radio" name="views" value="heatmap" checked> Weekly Heatmap
+    <input type="radio" name="views" value="linearea"> Compare Observatories
+    <input type="radio" name="views" value="lineoverlap"> Compare Before&After
+  </div>
+  <div class="interface">
+    측정소:
+    <select id="observatory">
+      <option value="101" selected>종로구</option>
+      <option value="102" >중구</option>
+      <option value="103" >용산구</option>
+      <option value="104" >은평구</option>
+      <option value="105" >서대문구</option>
+      <option value="106" >마포구</option>
+      <option value="107" >성동구</option>
+      <option value="108" >광진구</option>
+      <option value="109" >동대문구</option>
+      <option value="110" >중랑구</option>
+      <option value="111" >성북구</option>
+      <option value="112" >강북구</option>
+      <option value="113" >도봉구</option>
+      <option value="114" >노원구</option>
+      <option value="115" >양천구</option>
+      <option value="116" >강서구</option>
+      <option value="117" >구로구</option>
+      <option value="118" >금천구</option>
+      <option value="119" >영등포구</option>
+      <option value="120" >동작구</option>
+      <option value="121" >관악구</option>
+      <option value="122" >서초구</option>
+      <option value="123" >강남구</option>
+      <option value="124" >송파구</option>
+      <option value="125" >강동구</option>
+    </select>
+  </div>
+  <div class="interface">
+    항목:
+    <input type="radio" name="pollutant" value="SO2" checked> SO2
+    <input type="radio" name="pollutant" value="NO2"> NO2
+    <input type="radio" name="pollutant" value="CO"> CO
+    <input type="radio" name="pollutant" value="O3"> O3
+    <input type="radio" name="pollutant" value="PM10"> PM10
+    <input type="radio" name="pollutant" value="PM2.5"> PM2.5
+  </div>
+  <div>
+	기간:
+	<div class="slider">
+		<input type="text" id="period" class="slider">
+	</div>
+  </div>
+  <div id="emphasize" style="visibility:hidden">
+	강조 기간:
+	<div class="slider">
+		<input type="text" id="emp_period" class="slider">
+	</div>
+  </div>
+
+  <svg id="svg"></svg>
+</body>
+
+</html>
