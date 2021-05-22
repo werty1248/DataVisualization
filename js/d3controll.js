@@ -26,7 +26,7 @@ function str2date(str) {
     return new Date(y,m-1,d,h,M,s);
 }
 
-d3.csv("https://raw.githubusercontent.com/werty1248/DataVisualization/main/AIR_HOUR_202001.csv").then(csvData => {
+d3.csv("https://raw.githubusercontent.com/werty1248/DataVisualization/main/AIR_HOUR_202001.csv", function(csvData) {
     csvData.forEach((d, index) => {
 		d["측정항목"] = pollutant_info[d["측정항목 코드"]];
 		d["평균값"] = +d["평균값"];
@@ -34,7 +34,10 @@ d3.csv("https://raw.githubusercontent.com/werty1248/DataVisualization/main/AIR_H
 		d["국가 기준초과 구분"] = +d["국가 기준초과 구분"];
 		d["저장일시"] = str2date(d["저장일시"]);
 		d["측정일시"] = str2date(d["측정일시"]);
-    });
+	});
+}, function(error, rows){
+	console.log(error);
+});
 
     full_data = csvData.filter(function(d) {
 		return d["측정기 상태"] === "0";
