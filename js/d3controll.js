@@ -31,6 +31,7 @@ d3.csv("https://raw.githubusercontent.com/werty1248/DataVisualization/main/AIR_H
 	csvData["평균값"] = +csvData["평균값"];
 	csvData["지자체 기준초과 구분"] = +csvData["지자체 기준초과 구분"];
 	csvData["국가 기준초과 구분"] = +csvData["국가 기준초과 구분"];
+	console.log(csvData);
 	csvData["저장일시"] = str2date(csvData["저장일시"]);
 	csvData["측정일시"] = str2date(csvData["측정일시"]);
 	
