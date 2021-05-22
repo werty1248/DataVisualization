@@ -26,7 +26,7 @@ function str2date(str) {
     return new Date(y,m-1,d,h,M,s);
 }
 
-d3.csv("https://raw.githubusercontent.com/werty1248/DataVisualization/master/AIR_HOUR_202001.csv").then(csvData => {
+d3.csv("https://raw.githubusercontent.com/werty1248/DataVisualization/main/AIR_HOUR_202001.csv").then(csvData => {
     csvData.forEach((d, index) => {
 		d["측정항목"] = pollutant_info[d["측정항목 코드"]];
 		d["평균값"] = +d["평균값"];
